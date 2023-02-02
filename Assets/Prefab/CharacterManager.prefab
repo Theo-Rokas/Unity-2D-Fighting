@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &108232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475202}
+  - component: {fileID: 317923010}
+  m_Layer: 0
+  m_Name: CharacterManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &475202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 890.60547, y: 370.56497, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &317923010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284cfd989a0475b4d83ff00c9b17cd7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfUsers: 0
+  players:
+  - playerId: Player 1
+    inputId: 
+    playerType: 0
+    hasCharacter: 0
+    playerPrefab: {fileID: 0}
+    playerStates: {fileID: 0}
+    score: 0
+  - playerId: Player 2
+    inputId: 1
+    playerType: 1
+    hasCharacter: 0
+    playerPrefab: {fileID: 0}
+    playerStates: {fileID: 0}
+    score: 0
+  characterList:
+  - charId: fighter1
+    prefab: {fileID: 126410, guid: 5eb09603fd896ed4bb16435d222ab45a, type: 3}
+  - charId: fighter2
+    prefab: {fileID: 126410, guid: e1c74d60603d8eb4cafd4770026b1f6b, type: 3}
+  - charId: fighter3
+    prefab: {fileID: 126410, guid: 7caa66545a9f808499f1f1e0e274cfc8, type: 3}
