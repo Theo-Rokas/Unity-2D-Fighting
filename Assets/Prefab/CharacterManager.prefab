@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 475202}
   - component: {fileID: 317923010}
+  - component: {fileID: 2525492864674805088}
+  - component: {fileID: 4008338390007394130}
   m_Layer: 0
   m_Name: CharacterManager
   m_TagString: Untagged
@@ -44,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284cfd989a0475b4d83ff00c9b17cd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  solo: 0
   numberOfUsers: 0
   players:
   - playerId: Player 1
@@ -63,7 +66,45 @@ MonoBehaviour:
   characterList:
   - charId: fighter1
     prefab: {fileID: 126410, guid: 5eb09603fd896ed4bb16435d222ab45a, type: 3}
+    icon: {fileID: 21300000, guid: 7ffd7d870681cc844901fce683842b38, type: 3}
   - charId: fighter2
     prefab: {fileID: 126410, guid: e1c74d60603d8eb4cafd4770026b1f6b, type: 3}
+    icon: {fileID: 21300000, guid: 7ffd7d870681cc844901fce683842b38, type: 3}
   - charId: fighter3
     prefab: {fileID: 126410, guid: 7caa66545a9f808499f1f1e0e274cfc8, type: 3}
+    icon: {fileID: 21300000, guid: 7ffd7d870681cc844901fce683842b38, type: 3}
+--- !u!114 &2525492864674805088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd12a7808a9917946bd4eb967bdad1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressionStages: 2
+  levels:
+  - level_1
+  - level_2
+  mainScenes:
+  - levelId: intro
+  - levelId: select
+  - levelId: game_over
+  progIndex: 0
+  progression: []
+--- !u!114 &4008338390007394130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63ab114b80b40d48b56bcfe0babf255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai_stats: []

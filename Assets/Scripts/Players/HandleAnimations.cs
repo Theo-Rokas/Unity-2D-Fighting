@@ -24,7 +24,7 @@ public class HandleAnimations : MonoBehaviour
         anim.SetBool("OnAir", !states.onGround);
         anim.SetBool("Crouch", states.crouch);
 
-        float movement = Mathf.Abs(states.horizontal);
+        float movement = (states.lookRight) ? states.horizontal : -states.horizontal;
         anim.SetFloat("Movement", movement);
 
         if(states.vertical < 0)

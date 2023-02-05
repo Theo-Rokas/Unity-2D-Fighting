@@ -8,10 +8,11 @@ public class SelectScreenManager : MonoBehaviour
 {
     public int numberOfPlayers = 1;
     public List<PlayerInterfaces> plInterfaces = new List<PlayerInterfaces>();
-    public PotraitInfo[] potraitPrefabs;
-    public int maxX;
-    public int maxY;
-    PotraitInfo[,] charGrid;
+
+    int maxRow;
+    int maxCollumn;
+
+    List<PotraitInfo> potraitList = new List<PotraitInfo>();
 
     public GameObject potraitCanvas;
 
@@ -19,6 +20,8 @@ public class SelectScreenManager : MonoBehaviour
     public bool bothPlayerSelected;
 
     CharacterManager charManager;
+
+    GameObject potraitPrefab;
      
     public static SelectScreenManager instance;
     public static SelectScreenManager GetInstance()
@@ -36,21 +39,36 @@ public class SelectScreenManager : MonoBehaviour
         charManager = CharacterManager.GetInstance();
         numberOfPlayers = charManager.numberOfUsers;
 
-        charGrid = new PotraitInfo[maxX, maxY];
+        potraitPrefab = Resources.Load("potraitPrefab") as GameObject;
+        CreatePotraits();
+
+        charManager.solo = (numberOfPlayers == 1);        
+    }
+
+    void CreatePotraits()
+    {
+        GridLayoutGroup group = potraitCanvas.GetComponent<GridLayoutGroup>();
+
+        maxRow = group.constraintCount;
 
         int x = 0;
         int y = 0;
 
-        potraitPrefabs = potraitCanvas.GetComponentsInChildren<PotraitInfo>();
-
-        for(int i = 0; i < potraitPrefabs.Length; i++)
+        for(int i = 0; i < charManager.characterList.Count; i++)
         {
-            potraitPrefabs[i].posX += x;
-            potraitPrefabs[i].posY += y;
+            CharacterBase c = charManager.characterList[i];
 
-            charGrid[x, y] = potraitPrefabs[i];
+            GameObject go = Instantiate(potraitPrefab) as GameObject;
+            go.transform.SetParent(potraitCanvas.transform);
 
-            if(x < maxX - 1)
+            PotraitInfo p = go.GetComponent<PotraitInfo>();
+            p.img.sprite = c.icon;
+            p.characterId = c.charId;
+            p.posX = x;
+            p.posY = y;
+            potraitList.Add(p);
+
+            if(x < maxRow - 1)
             {
                 x++;
             }
@@ -59,6 +77,8 @@ public class SelectScreenManager : MonoBehaviour
                 x = 0;
                 y++;
             }
+
+            maxCollumn = y;
         }
     }
 
@@ -117,11 +137,11 @@ public class SelectScreenManager : MonoBehaviour
             {
                 if(vertical > 0)
                 {
-                    pl.activeY = (pl.activeY > 0) ? pl.activeY - 1 : maxY - 1;
+                    pl.activeY = (pl.activeY > 0) ? pl.activeY - 1 : maxCollumn - 1;
                 }
                 else
                 {
-                    pl.activeY = (pl.activeY < maxY - 1) ? pl.activeY + 1 : 0;
+                    pl.activeY = (pl.activeY < maxCollumn - 1) ? pl.activeY + 1 : 0;
                 }
 
                 pl.hitInputOnce = true;
@@ -136,11 +156,11 @@ public class SelectScreenManager : MonoBehaviour
             {
                 if (horizontal > 0)
                 {
-                    pl.activeX = (pl.activeX > 0) ? pl.activeX - 1 : maxX - 1;
+                    pl.activeX = (pl.activeX > 0) ? pl.activeX - 1 : maxRow - 1;
                 }
                 else
                 {
-                    pl.activeX = (pl.activeX < maxX - 1) ? pl.activeX + 1 : 0;
+                    pl.activeX = (pl.activeX < maxRow - 1) ? pl.activeX + 1 : 0;
                 }
 
                 pl.timerToReset = 0;
@@ -183,32 +203,46 @@ public class SelectScreenManager : MonoBehaviour
             {
                 if(charManager.players[i].playerPrefab == null)
                 {
-                    int ranValue = Random.Range(0, potraitPrefabs.Length);
+                    int ranValue = Random.Range(0, potraitList.Count);
 
                     charManager.players[i].playerPrefab =
-                        charManager.returnCharacterWithID(potraitPrefabs[ranValue].characterId).prefab;
+                        charManager.returnCharacterWithID(potraitList[ranValue].characterId).prefab;
 
-                    Debug.Log(potraitPrefabs[ranValue].characterId);
+                    Debug.Log(potraitList[ranValue].characterId);
                 }
             }
         }
 
         yield return new WaitForSeconds(2);
-        SceneManager.LoadSceneAsync("level", LoadSceneMode.Single);
+        
+        if(charManager.solo)
+        {
+            MySceneManager.GetInstance().CreateProgression();
+            MySceneManager.GetInstance().LoadNextOnProgression();
+        }
+        else
+        {
+            MySceneManager.GetInstance().RequestLevelLoad(MySceneManager.SceneType.prog, "level_1");
+        }
     }
 
     void HandleSelectorPosition(PlayerInterfaces pl)
     {
         pl.selector.SetActive(true);
 
-        pl.activePotrait = charGrid[pl.activeX, pl.activeY];
+        PotraitInfo pi = ReturnPotrait(pl.activeX, pl.activeY);
 
-        Vector2 selectorPosition = pl.activePotrait.transform.localPosition;
+        if (pi != null)
+        {
+            pl.activePotrait = pi;
 
-        selectorPosition = selectorPosition + new Vector2(potraitCanvas.transform.localPosition.x
-            , potraitCanvas.transform.localPosition.y);
+            Vector2 selectorPosition = pl.activePotrait.transform.localPosition;
 
-        pl.selector.transform.localPosition = selectorPosition;
+            selectorPosition = selectorPosition + new Vector2(potraitCanvas.transform.localPosition.x
+                , potraitCanvas.transform.localPosition.y);
+
+            pl.selector.transform.localPosition = selectorPosition;
+        }
     }
 
     void HandleCharacterPreview(PlayerInterfaces pl)
@@ -234,6 +268,20 @@ public class SelectScreenManager : MonoBehaviour
                 pl.createdCharacter.GetComponent<StateManager>().lookRight = false;
             }
         }
+    }
+
+    PotraitInfo ReturnPotrait(int x, int y)
+    {
+        PotraitInfo r = null;
+        for(int i = 0; i < potraitList.Count; i++)
+        {
+            if(potraitList[i].posX == x && potraitList[i].posY == y)
+            {
+                r = potraitList[i];
+            }
+        }
+
+        return r;
     }
 
     [System.Serializable]

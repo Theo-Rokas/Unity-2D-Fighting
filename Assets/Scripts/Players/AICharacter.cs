@@ -54,6 +54,8 @@ public class AICharacter : MonoBehaviour
     void Start()
     {
         states = GetComponent<StateManager>();
+
+        AISnapshots.GetInstance().RequestAISnapshot(this);
     }
 
     void Update()

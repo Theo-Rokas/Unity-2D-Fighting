@@ -532,6 +532,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[3].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ffd7d870681cc844901fce683842b38, type: 3}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[4].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ffd7d870681cc844901fce683842b38, type: 3}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[5].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ffd7d870681cc844901fce683842b38, type: 3}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[3].charId
+      value: fighter1
+      objectReference: {fileID: 0}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 126410, guid: 5eb09603fd896ed4bb16435d222ab45a, type: 3}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[4].charId
+      value: fighter2
+      objectReference: {fileID: 0}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 126410, guid: e1c74d60603d8eb4cafd4770026b1f6b, type: 3}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[5].charId
+      value: fighter3
+      objectReference: {fileID: 0}
+    - target: {fileID: 317923010, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: characterList.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 126410, guid: 7caa66545a9f808499f1f1e0e274cfc8, type: 3}
+    - target: {fileID: 4008338390007394130, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
+      propertyPath: ai_stats.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd7178b38f9baf047b66ccbf8a509bd2, type: 3}
 --- !u!1 &397099513
